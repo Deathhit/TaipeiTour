@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/app_database" />
+            <option value="$PROJECT_DIR$/core/app_ui" />
+            <option value="$PROJECT_DIR$/core/travel_taipei_api" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/attraction" />
+            <option value="$PROJECT_DIR$/data/attraction_image" />
+            <option value="$PROJECT_DIR$/data/language" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/attraction_detail" />
+            <option value="$PROJECT_DIR$/feature/attraction_gallery" />
+            <option value="$PROJECT_DIR$/feature/attraction_list" />
+            <option value="$PROJECT_DIR$/feature/image_viewer" />
+            <option value="$PROJECT_DIR$/feature/set_language" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

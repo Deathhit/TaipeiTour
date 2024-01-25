@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_viewer_close">Close</string>
+    <string name="image_viewer_image_description">Use gestures to zoom in and out of images.</string>
+</resources>

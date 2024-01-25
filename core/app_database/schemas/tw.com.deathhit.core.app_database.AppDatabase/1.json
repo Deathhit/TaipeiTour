@@ -1,0 +1,247 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "ec5ac501e1586f381cf8560fe30797ad",
+    "entities": [
+      {
+        "tableName": "AttractionEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`address` TEXT NOT NULL, `attraction_id` TEXT NOT NULL, `introduction` TEXT NOT NULL, `language` INTEGER NOT NULL, `name` TEXT NOT NULL, `update_time_text` TEXT NOT NULL, `website_url` TEXT NOT NULL, PRIMARY KEY(`attraction_id`))",
+        "fields": [
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attractionId",
+            "columnName": "attraction_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "introduction",
+            "columnName": "introduction",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updateTimeText",
+            "columnName": "update_time_text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "websiteUrl",
+            "columnName": "website_url",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "attraction_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "AttractionImageEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`attraction_id` TEXT NOT NULL, `image_url` TEXT NOT NULL, PRIMARY KEY(`attraction_id`, `image_url`), FOREIGN KEY(`attraction_id`) REFERENCES `AttractionEntity`(`attraction_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "attractionId",
+            "columnName": "attraction_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "image_url",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "attraction_id",
+            "image_url"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "AttractionEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "attraction_id"
+            ],
+            "referencedColumns": [
+              "attraction_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AttractionImageRemoteOrderEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`attraction_id` TEXT NOT NULL, `image_url` TEXT NOT NULL, `remote_order` INTEGER NOT NULL, PRIMARY KEY(`attraction_id`, `image_url`), FOREIGN KEY(`attraction_id`, `image_url`) REFERENCES `AttractionImageEntity`(`attraction_id`, `image_url`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "attractionId",
+            "columnName": "attraction_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "image_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteOrder",
+            "columnName": "remote_order",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "attraction_id",
+            "image_url"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "AttractionImageEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "attraction_id",
+              "image_url"
+            ],
+            "referencedColumns": [
+              "attraction_id",
+              "image_url"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AttractionRemoteKeysEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`attraction_id` TEXT NOT NULL, `next_key` INTEGER, `previous_key` INTEGER, PRIMARY KEY(`attraction_id`), FOREIGN KEY(`attraction_id`) REFERENCES `AttractionEntity`(`attraction_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "attractionId",
+            "columnName": "attraction_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nextKey",
+            "columnName": "next_key",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "previousKey",
+            "columnName": "previous_key",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "attraction_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "AttractionEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "attraction_id"
+            ],
+            "referencedColumns": [
+              "attraction_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AttractionRemoteOrderEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`attraction_id` TEXT NOT NULL, `remote_order` INTEGER NOT NULL, PRIMARY KEY(`attraction_id`), FOREIGN KEY(`attraction_id`) REFERENCES `AttractionEntity`(`attraction_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "attractionId",
+            "columnName": "attraction_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteOrder",
+            "columnName": "remote_order",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "attraction_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "AttractionEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "attraction_id"
+            ],
+            "referencedColumns": [
+              "attraction_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [
+      {
+        "viewName": "AttractionImageItemView",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT AttractionImageEntity.attraction_id AS attraction_id,AttractionImageEntity.image_url AS image_url,AttractionImageRemoteOrderEntity.remote_order AS remote_order FROM AttractionImageEntity LEFT JOIN AttractionImageRemoteOrderEntity ON AttractionImageRemoteOrderEntity.attraction_id = AttractionImageEntity.attraction_id AND AttractionImageRemoteOrderEntity.image_url = AttractionImageEntity.image_url"
+      },
+      {
+        "viewName": "AttractionItemView",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT AttractionEntity.address AS address,AttractionEntity.attraction_id AS attraction_id,(SELECT AttractionImageItemView.image_url FROM AttractionImageItemView WHERE AttractionEntity.attraction_id = AttractionImageItemView.attraction_id ORDER BY AttractionImageItemView.remote_order ASC LIMIT 1) AS image_url,AttractionEntity.introduction AS introduction,AttractionEntity.language AS language,AttractionEntity.name AS name,AttractionRemoteOrderEntity.remote_order AS remote_order,AttractionEntity.update_time_text AS update_time_text,AttractionEntity.website_url AS website_url FROM AttractionEntity LEFT JOIN AttractionRemoteOrderEntity ON AttractionRemoteOrderEntity.attraction_id = AttractionEntity.attraction_id"
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ec5ac501e1586f381cf8560fe30797ad')"
+    ]
+  }
+}

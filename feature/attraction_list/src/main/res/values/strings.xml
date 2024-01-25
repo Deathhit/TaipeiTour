@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="attraction_list_image_content_description">A picture of the attraction.</string>
+    <string name="attraction_list_menu_item_set_language">Set Language</string>
+</resources>
