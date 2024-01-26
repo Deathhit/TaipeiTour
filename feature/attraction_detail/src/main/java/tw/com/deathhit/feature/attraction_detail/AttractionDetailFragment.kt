@@ -109,7 +109,8 @@ class AttractionDetailFragment : Fragment() {
                         .collectLatest { attraction ->
                             with(binding) {
                                 imageViewAttraction.let {
-                                    Glide.with(it).load(attraction.imageUrl).into(it)
+                                    Glide.with(it).load(attraction.imageUrl)
+                                        .placeholder(tw.com.deathhit.core.app_ui.R.mipmap.ic_launcher_round).into(it)
                                 }
                                 textViewAddress.text = attraction.address
                                 textViewIntroduction.text = Html.fromHtml(
