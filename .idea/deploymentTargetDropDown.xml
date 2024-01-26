@@ -2,13 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Tests in 'tw.com.deathhit.core.app_database'">
+      <entry key="AttractionRemoteMediatorTest">
+        <State />
+      </entry>
+      <entry key="AttractionRepositoryTest">
         <State />
       </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="getAttractionItemsPagingSource()">
+      <entry key="getAttractionImageListFlow()">
+        <State />
+      </entry>
+      <entry key="getPhotoPagingDataFlow()">
         <State />
       </entry>
     </value>
