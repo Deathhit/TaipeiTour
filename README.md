@@ -1,4 +1,4 @@
-# SunflowerClone
+# TaipeiTour
 
 A sample project to demonstrate the practices of the Android app architecture illustrated below.
 
