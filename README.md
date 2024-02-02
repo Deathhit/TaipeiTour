@@ -17,6 +17,7 @@ To see the related medium article, checkout the [`Android Application Architectu
 ## Features
 
 <img src="docs/diagrams/Android App Architecture Overview.png"/>
+<img src="docs/diagrams/Taipei Tour Dependency Graph.png"/>
 
 This example shows how to build an Android project based on the app architecture.
 Please see the links below to understand this topic better.
