@@ -111,8 +111,9 @@ class NavigationFragment : Fragment() {
                                         attractionId = action.attractionId
                                     )
 
-                                    is NavigationViewModel.State.Action.GoToEventDetailScreen -> callback?.onGoToEventDetailScreen(
-                                        eventId = action.eventId
+                                    is NavigationViewModel.State.Action.GoToEventWebsite -> callback?.onGoToEventWebsite(
+                                        startUrl = action.startUrl,
+                                        title = action.title
                                     )
 
                                     NavigationViewModel.State.Action.SetLanguage -> setLanguageFragment
@@ -141,9 +142,10 @@ class NavigationFragment : Fragment() {
                     }
 
                 is EventListFragment -> fragment.callback = object : EventListFragment.Callback {
-                    override fun onGoToEventDetailScreen(eventId: String) {
-                        viewModel.goToEventDetailScreen(eventId = eventId)
+                    override fun onGoToEventWebsite(startUrl: String, title: String) {
+                        viewModel.goToEventWebsite(startUrl = startUrl, title = title)
                     }
+
                 }
             }
         }
@@ -178,6 +180,6 @@ class NavigationFragment : Fragment() {
 
     interface Callback {
         fun onGoToAttractionDetailScreen(attractionId: String)
-        fun onGoToEventDetailScreen(eventId: String)
+        fun onGoToEventWebsite(startUrl: String, title: String)
     }
 }

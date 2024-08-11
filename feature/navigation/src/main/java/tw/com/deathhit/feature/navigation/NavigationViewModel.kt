@@ -28,9 +28,14 @@ class NavigationViewModel @Inject constructor(private val savedStateHandle: Save
             )
     }
 
-    fun goToEventDetailScreen(eventId: String) {
+    fun goToEventWebsite(startUrl: String, title: String) {
         state =
-            state.copy(actions = state.actions + State.Action.GoToEventDetailScreen(eventId = eventId))
+            state.copy(
+                actions = state.actions + State.Action.GoToEventWebsite(
+                    startUrl = startUrl,
+                    title = title
+                )
+            )
     }
 
     fun onAction(action: State.Action) {
@@ -53,7 +58,7 @@ class NavigationViewModel @Inject constructor(private val savedStateHandle: Save
             data class GoToAttractionDetailScreen(val attractionId: String) : Action
 
             @Parcelize
-            data class GoToEventDetailScreen(val eventId: String) : Action
+            data class GoToEventWebsite(val startUrl: String, val title: String) : Action
 
             @Parcelize
             data object SetLanguage : Action

@@ -18,8 +18,9 @@ class MainActivityViewModel @Inject constructor(private val savedStateHandle: Sa
         }
     val stateFlow = savedStateHandle.getStateFlow(KEY_STATE, state)
 
-    fun goBack() {
-        state = state.copy(actions = state.actions + State.Action.GoBack)
+    fun goBack(isWebViewCanGoBack: Boolean = false) {
+        state =
+            state.copy(actions = state.actions + State.Action.GoBack(isWebViewCanGoBack = isWebViewCanGoBack))
     }
 
     fun goToAttractionDetailScreen(attractionId: String) {
@@ -27,16 +28,6 @@ class MainActivityViewModel @Inject constructor(private val savedStateHandle: Sa
             actions = state.actions + State.Action.GoToScreen(
                 screen = MainScreen.AttractionDetail(
                     attractionId = attractionId
-                )
-            )
-        )
-    }
-
-    fun goToEventDetailScreen(eventId: String) {
-        state = state.copy(
-            actions = state.actions + State.Action.GoToScreen(
-                screen = MainScreen.EventDetail(
-                    eventId = eventId
                 )
             )
         )
@@ -60,6 +51,17 @@ class MainActivityViewModel @Inject constructor(private val savedStateHandle: Sa
         )
     }
 
+    fun goToWebsite(startUrl: String, title: String) {
+        state = state.copy(
+            actions = state.actions + State.Action.GoToScreen(
+                screen = MainScreen.WebView(
+                    startUrl = startUrl,
+                    title = title
+                )
+            )
+        )
+    }
+
     fun onAction(action: State.Action) {
         state = state.copy(actions = state.actions - action)
     }
@@ -73,7 +75,7 @@ class MainActivityViewModel @Inject constructor(private val savedStateHandle: Sa
     data class State(val actions: List<Action> = emptyList()) : Parcelable {
         sealed interface Action : Parcelable {
             @Parcelize
-            data object GoBack : Action
+            data class GoBack(val isWebViewCanGoBack: Boolean) : Action
 
             @Parcelize
             data class GoToScreen(val screen: MainScreen) : Action

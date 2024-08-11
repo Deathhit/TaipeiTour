@@ -17,6 +17,7 @@ import tw.com.deathhit.feature.attraction_detail.AttractionDetailFragment
 import tw.com.deathhit.feature.attraction_gallery.AttractionGalleryFragment
 import tw.com.deathhit.feature.image_viewer.ImageViewerFragment
 import tw.com.deathhit.feature.navigation.NavigationFragment
+import tw.com.deathhit.feature.web_view.WebViewFragment
 import tw.com.deathhit.taipei_tour.databinding.ActivityMainBinding
 import tw.com.deathhit.taipei_tour.model.MainScreen
 
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
     private val navController by lazy {
         findNavController(R.id.container)
     }
+
+    private val webViewFragment
+        get() = navController.currentDestination?.id?.let { id ->
+            supportFragmentManager.findFragmentById(id) as WebViewFragment?
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         configureFragmentCallbacks()
@@ -48,7 +54,10 @@ class MainActivity : AppCompatActivity() {
                     .collectLatest { actions ->
                         actions.forEach { action ->
                             when (action) {
-                                MainActivityViewModel.State.Action.GoBack -> onBackPressedDispatcher.onBackPressed()
+                                is MainActivityViewModel.State.Action.GoBack -> if (action.isWebViewCanGoBack)
+                                    webViewFragment?.goBackInWebView()
+                                else
+                                    onBackPressedDispatcher.onBackPressed()
 
                                 is MainActivityViewModel.State.Action.GoToScreen -> goToScreen(
                                     screen = action.screen
@@ -97,16 +106,24 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
-                        is NavigationFragment -> fragment.callback = object : NavigationFragment.Callback {
-                            override fun onGoToAttractionDetailScreen(attractionId: String) {
-                                viewModel.goToAttractionDetailScreen(attractionId = attractionId)
+                        is NavigationFragment -> fragment.callback =
+                            object : NavigationFragment.Callback {
+                                override fun onGoToAttractionDetailScreen(attractionId: String) {
+                                    viewModel.goToAttractionDetailScreen(attractionId = attractionId)
+                                }
+
+                                override fun onGoToEventWebsite(startUrl: String, title: String) {
+                                    viewModel.goToWebsite(startUrl = startUrl, title = title)
+                                }
                             }
 
-                            override fun onGoToEventDetailScreen(eventId: String) {
-                                viewModel.goToEventDetailScreen(eventId = eventId)
-                            }
+                        is WebViewFragment -> fragment.callback =
+                            object : WebViewFragment.Callback {
+                                override fun onGoBack(isWebViewCanGoBack: Boolean) {
+                                    viewModel.goBack(isWebViewCanGoBack = isWebViewCanGoBack)
+                                }
 
-                        }
+                            }
                     }
                 }
             }
@@ -120,8 +137,6 @@ class MainActivity : AppCompatActivity() {
                 AttractionDetailFragment.createArgs(attractionId = screen.attractionId)
             )
 
-            is MainScreen.EventDetail -> TODO()
-
             is MainScreen.Gallery -> navController.navigate(
                 R.id.action_attractionGallery,
                 AttractionGalleryFragment.createArgs(attractionId = screen.attractionId)
@@ -130,6 +145,11 @@ class MainActivity : AppCompatActivity() {
             is MainScreen.ImageViewer -> navController.navigate(
                 R.id.action_imageViewer,
                 ImageViewerFragment.createArgs(imageUrl = screen.imageUrl)
+            )
+
+            is MainScreen.WebView -> navController.navigate(
+                R.id.action_webView,
+                WebViewFragment.createArgs(startUrl = screen.startUrl, title = screen.title)
             )
         }
     }

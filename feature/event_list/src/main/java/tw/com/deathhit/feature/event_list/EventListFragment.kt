@@ -62,8 +62,9 @@ class EventListFragment : Fragment() {
                         .collectLatest { actions ->
                             actions.forEach { action ->
                                 when (action) {
-                                    is EventListViewModel.State.Action.GoToEventDetailScreen -> callback?.onGoToEventDetailScreen(
-                                        action.eventId
+                                    is EventListViewModel.State.Action.GoToEventWebsite -> callback?.onGoToEventWebsite(
+                                        startUrl = action.startUrl,
+                                        title = action.title
                                     )
                                 }
 
@@ -83,7 +84,7 @@ class EventListFragment : Fragment() {
 
     private fun createEventListAdapter() =
         EventListAdapter {
-            viewModel.goToEventDetailScreen(it.eventId)
+            viewModel.goToEventWebsite(startUrl = it.websiteUrl, title = it.title)
         }
 
     companion object {
@@ -91,6 +92,6 @@ class EventListFragment : Fragment() {
     }
 
     interface Callback {
-        fun onGoToEventDetailScreen(eventId: String)
+        fun onGoToEventWebsite(startUrl: String, title: String)
     }
 }

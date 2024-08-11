@@ -24,11 +24,12 @@ class EventListViewModel @Inject constructor(
 
     val eventPagingDataFlow = createEventPagingDataFlow().cachedIn(viewModelScope)
 
-    fun goToEventDetailScreen(eventId: String) {
+    fun goToEventWebsite(startUrl: String, title: String) {
         state =
             state.copy(
-                actions = state.actions + State.Action.GoToEventDetailScreen(
-                    eventId = eventId
+                actions = state.actions + State.Action.GoToEventWebsite(
+                    startUrl = startUrl,
+                    title = title
                 )
             )
     }
@@ -49,7 +50,7 @@ class EventListViewModel @Inject constructor(
     data class State(val actions: List<Action> = emptyList()) : Parcelable {
         sealed interface Action : Parcelable {
             @Parcelize
-            data class GoToEventDetailScreen(val eventId: String) : Action
+            data class GoToEventWebsite(val startUrl: String, val title: String) : Action
         }
     }
 }

@@ -122,6 +122,9 @@ class WebViewFragment : Fragment() {
             set(value) {
                 putBundle(KEY_WEB_VIEW_STATE, value)
             }
+
+        fun createArgs(startUrl: String, title: String) =
+            WebViewViewModel.createArgs(startUrl = startUrl, title = title)
     }
 
     interface Callback {

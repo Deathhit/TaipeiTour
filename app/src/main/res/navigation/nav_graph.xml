@@ -25,6 +25,11 @@
         android:name="tw.com.deathhit.feature.navigation.NavigationFragment"
         android:label="Attraction List" />
 
+    <fragment
+        android:id="@+id/fragment_webView"
+        android:name="tw.com.deathhit.feature.web_view.WebViewFragment"
+        android:label="Web View"/>
+
     <!--Action-->
     <action
         android:id="@+id/action_attractionDetail"
@@ -45,6 +50,12 @@
     <action
         android:id="@+id/action_navigation"
         app:destination="@id/fragment_navigation"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_webView"
+        app:destination="@id/fragment_webView"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right" />
 </navigation>

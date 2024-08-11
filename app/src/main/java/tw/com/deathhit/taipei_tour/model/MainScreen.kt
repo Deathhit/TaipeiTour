@@ -14,5 +14,5 @@ sealed interface MainScreen : Parcelable {
     data class ImageViewer(val imageUrl: String) : MainScreen
 
     @Parcelize
-    data class EventDetail(val eventId: String) : MainScreen
+    data class WebView(val startUrl: String, val title: String) : MainScreen
 }
