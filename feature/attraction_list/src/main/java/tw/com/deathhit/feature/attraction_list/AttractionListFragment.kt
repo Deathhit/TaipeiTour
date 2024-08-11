@@ -97,7 +97,7 @@ class AttractionListFragment : Fragment() {
                         .collectLatest { actions ->
                             actions.forEach { action ->
                                 when (action) {
-                                    is AttractionListViewModel.State.Action.GoToAttractionDetailScreen -> callback?.onGoToAttractionDetailsScreen(
+                                    is AttractionListViewModel.State.Action.GoToAttractionDetailScreen -> callback?.onGoToAttractionDetailScreen(
                                         action.attractionId
                                     )
 
@@ -133,6 +133,6 @@ class AttractionListFragment : Fragment() {
     }
 
     interface Callback {
-        fun onGoToAttractionDetailsScreen(attractionId: String)
+        fun onGoToAttractionDetailScreen(attractionId: String)
     }
 }
