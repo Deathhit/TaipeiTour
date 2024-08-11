@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":core:travel_taipei_api"))
     implementation(project(":data:attraction"))
     implementation(project(":data:attraction_image"))
+    implementation(project(":data:event"))
     implementation(project(":data:language"))
     implementation(project(":domain"))
     implementation(project(":feature:attraction_detail"))
