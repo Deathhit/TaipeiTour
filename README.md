@@ -12,6 +12,7 @@ To see the related medium article, checkout the [`Android Application Architectu
 <img src="docs/screenshots/Screenshot_3.png" width = 360> &nbsp;
 <img src="docs/screenshots/Screenshot_4.png" width = 360> &nbsp;
 <img src="docs/screenshots/Screenshot_5.png" width = 360> &nbsp;
+<img src="docs/screenshots/Screenshot_6.png" width = 360> &nbsp;
 </p>
 
 ## Features
@@ -20,11 +21,6 @@ To see the related medium article, checkout the [`Android Application Architectu
 <img src="docs/diagrams/Taipei Tour Dependency Graph.png"/>
 
 This example shows how to build an Android project based on the app architecture.
-Please see the links below to understand this topic better.
-
-[Guide to app architecture](https://developer.android.com/topic/architecture)
-
-[Guide to Android app modularization](https://developer.android.com/topic/modularization)
 
 ## Api References
 
