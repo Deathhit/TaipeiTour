@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "tw.com.deathhit.feature.navigation"
+    namespace = "tw.com.deathhit.feature.set_day_night"
     compileSdk = 34
 
     defaultConfig {
@@ -43,10 +43,7 @@ android {
 
 dependencies {
     implementation(project(":core:app_ui"))
-    implementation(project(":feature:attraction_list"))
-    implementation(project(":feature:event_list"))
-    implementation(project(":feature:set_day_night"))
-    implementation(project(":feature:set_language"))
+    implementation(project(":domain"))
 
     //Coroutine-Test
     androidTestImplementation(libs.jetbrains.koltin.coroutine.test)

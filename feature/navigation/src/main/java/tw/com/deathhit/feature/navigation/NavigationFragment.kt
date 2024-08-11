@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import tw.com.deathhit.feature.attraction_list.AttractionListFragment
 import tw.com.deathhit.feature.event_list.EventListFragment
 import tw.com.deathhit.feature.navigation.databinding.FragmentNavigationBinding
+import tw.com.deathhit.feature.set_day_night.SetDayNightFragment
 import tw.com.deathhit.feature.set_language.SetLanguageFragment
 
 @AndroidEntryPoint
@@ -34,12 +35,19 @@ class NavigationFragment : Fragment() {
     private val tabLayoutMediator get() = _tabLayoutMediator!!
     private var _tabLayoutMediator: TabLayoutMediator? = null
 
+    private val setDayNightFragment get() = childFragmentManager.findFragmentByTag(TAG_SET_DAY_NIGHT) as SetDayNightFragment?
     private val setLanguageFragment get() = childFragmentManager.findFragmentByTag(TAG_SET_LANGUAGE) as SetLanguageFragment?
 
     private val onClickMenuItemListener = Toolbar.OnMenuItemClickListener { item ->
         when (item.itemId) {
             R.id.action_setLanguage -> {
                 viewModel.setLanguage()
+
+                true
+            }
+
+            R.id.action_setDayNight -> {
+                viewModel.setDayNight()
 
                 true
             }
@@ -116,6 +124,12 @@ class NavigationFragment : Fragment() {
                                         title = action.title
                                     )
 
+                                    NavigationViewModel.State.Action.SetDayNight -> setDayNightFragment
+                                        ?: run {
+                                            SetDayNightFragment.create()
+                                                .show(childFragmentManager, TAG_SET_DAY_NIGHT)
+                                        }
+
                                     NavigationViewModel.State.Action.SetLanguage -> setLanguageFragment
                                         ?: run {
                                             SetLanguageFragment.create()
@@ -173,6 +187,7 @@ class NavigationFragment : Fragment() {
 
     companion object {
         private const val TAG = "NavigationFragment"
+        private const val TAG_SET_DAY_NIGHT = "$TAG.SET_DAY_NIGHT"
         private const val TAG_SET_LANGUAGE = "$TAG.SET_LANGUAGE"
 
         fun create() = NavigationFragment()

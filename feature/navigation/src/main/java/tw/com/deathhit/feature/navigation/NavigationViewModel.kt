@@ -5,8 +5,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.parcelize.Parcelize
-import tw.com.deathhit.feature.attraction_list.AttractionListViewModel.State
-import tw.com.deathhit.feature.attraction_list.AttractionListViewModel.State.Action
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,6 +40,10 @@ class NavigationViewModel @Inject constructor(private val savedStateHandle: Save
         state = state.copy(actions = state.actions - action)
     }
 
+    fun setDayNight() {
+        state = state.copy(actions = state.actions + State.Action.SetDayNight)
+    }
+
     fun setLanguage() {
         state = state.copy(actions = state.actions + State.Action.SetLanguage)
     }
@@ -62,6 +64,9 @@ class NavigationViewModel @Inject constructor(private val savedStateHandle: Save
 
             @Parcelize
             data object SetLanguage : Action
+
+            @Parcelize
+            data object SetDayNight : Action
         }
     }
 }
