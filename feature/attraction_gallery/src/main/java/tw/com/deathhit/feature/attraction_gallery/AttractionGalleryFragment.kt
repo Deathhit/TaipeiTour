@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import tw.com.deathhit.core.app_ui.LoadStateFooterAdapter
 import tw.com.deathhit.feature.attraction_gallery.databinding.FragmentAttractionGalleryBinding
 
 @AndroidEntryPoint

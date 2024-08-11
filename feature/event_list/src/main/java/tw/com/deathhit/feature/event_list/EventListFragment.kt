@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import tw.com.deathhit.core.app_ui.LoadStateFooterAdapter
 import tw.com.deathhit.feature.event_list.databinding.FragmentEventListBinding
 
 @AndroidEntryPoint
@@ -40,6 +41,7 @@ class EventListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding.recyclerView) {
             adapter = createEventListAdapter().also { _eventListAdapter = it }
+                .withLoadStateFooter(LoadStateFooterAdapter())
             setHasFixedSize(true)
         }
 
