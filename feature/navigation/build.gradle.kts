@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "tw.com.deathhit.feature.attraction_list"
+    namespace = "tw.com.deathhit.feature.navigation"
     compileSdk = 34
 
     defaultConfig {
@@ -43,21 +43,16 @@ android {
 
 dependencies {
     implementation(project(":core:app_ui"))
-    implementation(project(":domain"))
+    implementation(project(":feature:attraction_list"))
+    implementation(project(":feature:event_list"))
+    implementation(project(":feature:set_language"))
 
     //Coroutine-Test
     androidTestImplementation(libs.jetbrains.koltin.coroutine.test)
 
-    //Glide
-    kapt(libs.glide.compiler)
-    implementation(libs.glide)
-
     //Hilt
     kapt(libs.hilt.compiler)
     implementation(libs.hilt)
-
-    //Paging-Test
-    androidTestImplementation(libs.paging.test)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -65,8 +65,8 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":feature:attraction_detail"))
     implementation(project(":feature:attraction_gallery"))
-    implementation(project(":feature:attraction_list"))
     implementation(project(":feature:image_viewer"))
+    implementation(project(":feature:navigation"))
 
     //Coroutine-Test
     androidTestImplementation(libs.jetbrains.koltin.coroutine.test)

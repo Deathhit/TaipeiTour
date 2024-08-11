@@ -32,7 +32,7 @@ class EventListAdapter(
     }
 
     private fun bindEventDescription(holder: EventViewHolder, item: EventDO) {
-        holder.binding.textViewDescription.text = item.description
+        holder.binding.textViewDescription.text = item.description.trim()
     }
 
     private fun bindEventTitle(holder: EventViewHolder, item: EventDO) {

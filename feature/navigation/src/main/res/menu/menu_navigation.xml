@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_setLanguage"
         android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="@string/attraction_list_menu_item_set_language"
+        android:title="@string/navigation_menu_item_set_language"
         app:showAsAction="ifRoom" />
 </menu>

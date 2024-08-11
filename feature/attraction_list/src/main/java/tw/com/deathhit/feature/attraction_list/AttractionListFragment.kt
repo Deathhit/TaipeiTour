@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,7 +16,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import tw.com.deathhit.feature.attraction_list.databinding.FragmentAttractionListBinding
-import tw.com.deathhit.feature.set_language.SetLanguageFragment
 
 @AndroidEntryPoint
 class AttractionListFragment : Fragment() {
@@ -30,20 +28,6 @@ class AttractionListFragment : Fragment() {
 
     private val attractionListAdapter get() = _attractionListAdapter!!
     private var _attractionListAdapter: AttractionListAdapter? = null
-
-    private val setLanguageFragment get() = childFragmentManager.findFragmentByTag(TAG_SET_LANGUAGE) as SetLanguageFragment?
-
-    private val onClickMenuItemListener = Toolbar.OnMenuItemClickListener { item ->
-        when (item.itemId) {
-            R.id.action_setLanguage -> {
-                viewModel.setLanguage()
-
-                true
-            }
-
-            else -> false
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,25 +44,7 @@ class AttractionListFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        with(binding.toolbar) {
-            title = getString(context.applicationInfo.labelRes)
-        }
-
         bindViewModelState()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        with(binding) {
-            toolbar.setOnMenuItemClickListener(onClickMenuItemListener)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        with(binding) {
-            toolbar.setOnMenuItemClickListener(null)
-        }
     }
 
     override fun onDestroyView() {
@@ -100,10 +66,6 @@ class AttractionListFragment : Fragment() {
                                     is AttractionListViewModel.State.Action.GoToAttractionDetailScreen -> callback?.onGoToAttractionDetailScreen(
                                         action.attractionId
                                     )
-
-                                    AttractionListViewModel.State.Action.SetLanguage -> setLanguageFragment ?: run {
-                                        SetLanguageFragment.create().show(childFragmentManager, TAG_SET_LANGUAGE)
-                                    }
                                 }
 
                                 viewModel.onAction(action)
@@ -126,9 +88,6 @@ class AttractionListFragment : Fragment() {
         }
 
     companion object {
-        private const val TAG = "AttractionListFragment"
-        private const val TAG_SET_LANGUAGE = "$TAG.SET_LANGUAGE"
-
         fun create() = AttractionListFragment()
     }
 

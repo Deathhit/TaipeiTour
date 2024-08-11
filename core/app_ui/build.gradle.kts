@@ -59,6 +59,9 @@ dependencies {
     //Recycler View
     api(libs.recyclerview)
 
+    //View Pager 2
+    api(libs.viewpager2)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

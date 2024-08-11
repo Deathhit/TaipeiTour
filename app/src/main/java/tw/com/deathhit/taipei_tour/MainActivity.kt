@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import tw.com.deathhit.feature.attraction_detail.AttractionDetailFragment
 import tw.com.deathhit.feature.attraction_gallery.AttractionGalleryFragment
-import tw.com.deathhit.feature.attraction_list.AttractionListFragment
 import tw.com.deathhit.feature.image_viewer.ImageViewerFragment
+import tw.com.deathhit.feature.navigation.NavigationFragment
 import tw.com.deathhit.taipei_tour.databinding.ActivityMainBinding
 import tw.com.deathhit.taipei_tour.model.MainScreen
 
@@ -90,19 +90,23 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
-                        is AttractionListFragment -> fragment.callback =
-                            object : AttractionListFragment.Callback {
-                                override fun onGoToAttractionDetailsScreen(attractionId: String) {
-                                    viewModel.goToAttractionDetailsScreen(attractionId = attractionId)
-                                }
-                            }
-
                         is ImageViewerFragment -> fragment.callback =
                             object : ImageViewerFragment.Callback {
                                 override fun onGoBack() {
                                     viewModel.goBack()
                                 }
                             }
+
+                        is NavigationFragment -> fragment.callback = object : NavigationFragment.Callback {
+                            override fun onGoToAttractionDetailScreen(attractionId: String) {
+                                viewModel.goToAttractionDetailScreen(attractionId = attractionId)
+                            }
+
+                            override fun onGoToEventDetailScreen(eventId: String) {
+                                viewModel.goToEventDetailScreen(eventId = eventId)
+                            }
+
+                        }
                     }
                 }
             }
@@ -116,9 +120,7 @@ class MainActivity : AppCompatActivity() {
                 AttractionDetailFragment.createArgs(attractionId = screen.attractionId)
             )
 
-            MainScreen.AttractionList -> navController.navigate(
-                R.id.action_attractionList
-            )
+            is MainScreen.EventDetail -> TODO()
 
             is MainScreen.Gallery -> navController.navigate(
                 R.id.action_attractionGallery,

@@ -8,11 +8,11 @@ sealed interface MainScreen : Parcelable {
     data class AttractionDetail(val attractionId: String) : MainScreen
 
     @Parcelize
-    data object AttractionList : MainScreen
-
-    @Parcelize
     data class Gallery(val attractionId: String) : MainScreen
 
     @Parcelize
     data class ImageViewer(val imageUrl: String) : MainScreen
+
+    @Parcelize
+    data class EventDetail(val eventId: String) : MainScreen
 }

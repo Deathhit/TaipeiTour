@@ -49,7 +49,7 @@ class AttractionListAdapter(
     }
 
     private fun bindAttractionIntroduction(holder: AttractionViewHolder, item: AttractionDO) {
-        holder.binding.textViewIntroduction.text = item.introduction
+        holder.binding.textViewIntroduction.text = item.introduction.trim()
     }
 
     private fun bindAttractionName(holder: AttractionViewHolder, item: AttractionDO) {

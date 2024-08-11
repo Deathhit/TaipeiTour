@@ -22,11 +22,21 @@ class MainActivityViewModel @Inject constructor(private val savedStateHandle: Sa
         state = state.copy(actions = state.actions + State.Action.GoBack)
     }
 
-    fun goToAttractionDetailsScreen(attractionId: String) {
+    fun goToAttractionDetailScreen(attractionId: String) {
         state = state.copy(
             actions = state.actions + State.Action.GoToScreen(
                 screen = MainScreen.AttractionDetail(
                     attractionId = attractionId
+                )
+            )
+        )
+    }
+
+    fun goToEventDetailScreen(eventId: String) {
+        state = state.copy(
+            actions = state.actions + State.Action.GoToScreen(
+                screen = MainScreen.EventDetail(
+                    eventId = eventId
                 )
             )
         )

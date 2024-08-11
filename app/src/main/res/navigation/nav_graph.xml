@@ -2,14 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_attractionList">
+    app:startDestination="@id/fragment_navigation">
 
     <!--Fragment-->
-    <fragment
-        android:id="@+id/fragment_attractionList"
-        android:name="tw.com.deathhit.feature.attraction_list.AttractionListFragment"
-        android:label="Attraction List" />
-
     <fragment
         android:id="@+id/fragment_attractionDetail"
         android:name="tw.com.deathhit.feature.attraction_detail.AttractionDetailFragment"
@@ -25,16 +20,15 @@
         android:name="tw.com.deathhit.feature.image_viewer.ImageViewerFragment"
         android:label="Image Viewer" />
 
+    <fragment
+        android:id="@+id/fragment_navigation"
+        android:name="tw.com.deathhit.feature.navigation.NavigationFragment"
+        android:label="Attraction List" />
+
     <!--Action-->
     <action
         android:id="@+id/action_attractionDetail"
         app:destination="@id/fragment_attractionDetail"
-        app:enterAnim="@anim/slide_in_left"
-        app:exitAnim="@anim/slide_out_right" />
-
-    <action
-        android:id="@+id/action_attractionList"
-        app:destination="@id/fragment_attractionList"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right" />
 
@@ -47,4 +41,10 @@
     <action
         android:id="@+id/action_imageViewer"
         app:destination="@id/fragment_imageViewer" />
+
+    <action
+        android:id="@+id/action_navigation"
+        app:destination="@id/fragment_navigation"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right" />
 </navigation>
