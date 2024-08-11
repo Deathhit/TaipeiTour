@@ -1,6 +1,7 @@
 package tw.com.deathhit.core.travel_taipei_api.config
 
 import tw.com.deathhit.core.travel_taipei_api.protocol.response.GetAttractionsResponse
+import tw.com.deathhit.core.travel_taipei_api.protocol.response.GetEventsResponse
 import java.util.UUID
 import kotlin.random.Random
 
@@ -22,6 +23,24 @@ internal fun generateGetAttractionsResponse() =
                         introduction = getRandomStr(),
                         modified = getRandomStr(),
                         name = getRandomStr(),
+                        url = getRandomStr()
+                    )
+                )
+            }
+        }.toList()
+    )
+
+internal fun generateGetEventsResponse() =
+    GetEventsResponse(
+        data = mutableListOf<GetEventsResponse.Event>().apply {
+            for (i in 0..getRandomInt()) {
+                add(
+                    GetEventsResponse.Event(
+                        description = getRandomStr(),
+                        id = getRandomStr(),
+                        modified = getRandomStr(),
+                        posted = getRandomStr(),
+                        title = getRandomStr(),
                         url = getRandomStr()
                     )
                 )
