@@ -1,4 +1,4 @@
-package tw.com.deathhit.data.attraction
+package tw.com.deathhit.data.event
 
 import android.content.Context
 import androidx.paging.testing.asSnapshot
@@ -13,24 +13,24 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import tw.com.deathhit.core.app_database.AppDatabase
-import tw.com.deathhit.core.app_database.entity.AttractionRemoteOrderEntity
+import tw.com.deathhit.core.app_database.entity.EventRemoteOrderEntity
 import tw.com.deathhit.core.travel_taipei_api.TravelTaipeiService
 import tw.com.deathhit.core.travel_taipei_api.model.AttractionDto
 import tw.com.deathhit.core.travel_taipei_api.model.EventDto
-import tw.com.deathhit.data.attraction.config.buildAppDatabase
-import tw.com.deathhit.data.attraction.config.generateAttractionEntities
-import tw.com.deathhit.data.attraction.config.generateLanguage
-import tw.com.deathhit.domain.AttractionRepository
+import tw.com.deathhit.data.event.config.buildAppDatabase
+import tw.com.deathhit.data.event.config.generateEventEntities
+import tw.com.deathhit.data.event.config.generateLanguage
+import tw.com.deathhit.domain.EventRepository
 import tw.com.deathhit.domain.LanguageRepository
 import tw.com.deathhit.domain.enum_type.Language
 import tw.com.deathhit.domain.model.LanguageDO
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class AttractionRepositoryTest {
+class EventRepositoryTest {
     private lateinit var appDatabase: AppDatabase
 
-    private val attractionDao get() = appDatabase.attractionDao()
-    private val attractionRemoteOrderDao get() = appDatabase.attractionRemoteOrderDao()
+    private val eventDao get() = appDatabase.eventDao()
+    private val eventRemoteOrderDao get() = appDatabase.eventRemoteOrderDao()
 
     @Before
     fun setup() {
@@ -40,12 +40,12 @@ class AttractionRepositoryTest {
     }
 
     @Test
-    fun getAttractionFlow() = runTest {
+    fun getEventFlow() = runTest {
         //Given
         val language = generateLanguage()
 
-        val attractionEntities = generateAttractionEntities(language = language)
-        val attractionRepository: AttractionRepository = AttractionRepositoryImp(
+        val eventEntities = generateEventEntities(language = language)
+        val eventRepository: EventRepository = EventRepositoryImp(
             appDatabase = appDatabase,
             languageRepository = object : LanguageRepository {
                 override fun getLanguageListFlow(): Flow<List<LanguageDO>> = emptyFlow()
@@ -72,30 +72,30 @@ class AttractionRepositoryTest {
             }
         )
 
-        val attractionEntity = attractionEntities.random()
+        val eventEntity = eventEntities.random()
 
-        attractionDao.upsert(attractionEntities)
+        eventDao.upsert(eventEntities)
         advanceUntilIdle()
 
         //When
-        val attractionDO =
-            attractionRepository.getAttractionFlow(attractionEntity.attractionId).first()!!
+        val eventDO =
+            eventRepository.getEventFlow(eventEntity.eventId).first()!!
 
         //Then
-        assert(attractionDO.address == attractionEntity.address)
-        assert(attractionDO.attractionId == attractionEntity.attractionId)
-        assert(attractionDO.introduction == attractionEntity.introduction)
-        assert(attractionDO.name == attractionEntity.name)
-        assert(attractionDO.updateTimeText == attractionEntity.updateTimeText)
-        assert(attractionDO.websiteUrl == attractionEntity.websiteUrl)
+        assert(eventDO.description == eventEntity.description)
+        assert(eventDO.eventId == eventEntity.eventId)
+        assert(eventDO.postTimeText == eventEntity.postTimeText)
+        assert(eventDO.title == eventEntity.title)
+        assert(eventDO.updateTimeText == eventEntity.updateTimeText)
+        assert(eventDO.websiteUrl == eventEntity.websiteUrl)
     }
 
     @Test
-    fun getAttractionPagingDataFlow() = runTest {
+    fun getEventPagingDataFlow() = runTest {
         //Given
         val language = generateLanguage()
 
-        val attractionRepository: AttractionRepository = AttractionRepositoryImp(
+        val eventRepository: EventRepository = EventRepositoryImp(
             appDatabase = appDatabase,
             languageRepository = object : LanguageRepository {
                 override fun getLanguageListFlow(): Flow<List<LanguageDO>> = emptyFlow()
@@ -122,35 +122,35 @@ class AttractionRepositoryTest {
             }
         )
 
-        val attractionEntities = generateAttractionEntities(language = language)
-        val attractionRemoteOrderEntities =
-            attractionEntities.mapIndexed { index, attractionEntity ->
-                AttractionRemoteOrderEntity(
-                    attractionId = attractionEntity.attractionId,
+        val eventEntities = generateEventEntities(language = language)
+        val eventRemoteOrderEntities =
+            eventEntities.mapIndexed { index, eventEntity ->
+                EventRemoteOrderEntity(
+                    eventId = eventEntity.eventId,
                     remoteOrder = index
                 )
             }
 
-        attractionDao.upsert(attractionEntities)
-        attractionRemoteOrderDao.upsert(attractionRemoteOrderEntities)
+        eventDao.upsert(eventEntities)
+        eventRemoteOrderDao.upsert(eventRemoteOrderEntities)
         advanceUntilIdle()
 
         //When
-        val attractions = attractionRepository.getAttractionPagingDataFlow()
-        val attractionsSnapshot = attractions.asSnapshot {
-            scrollTo(attractionEntities.size)
+        val events = eventRepository.getEventPagingDataFlow()
+        val eventsSnapshot = events.asSnapshot {
+            scrollTo(eventEntities.size)
         }
 
         //Then
-        attractionsSnapshot.forEachIndexed { index, attractionDO ->
-            val attractionEntity = attractionEntities[index]
+        eventsSnapshot.forEachIndexed { index, eventDO ->
+            val eventEntity = eventEntities[index]
 
-            assert(attractionDO.address == attractionEntity.address)
-            assert(attractionDO.attractionId == attractionEntity.attractionId)
-            assert(attractionDO.introduction == attractionEntity.introduction)
-            assert(attractionDO.name == attractionEntity.name)
-            assert(attractionDO.updateTimeText == attractionEntity.updateTimeText)
-            assert(attractionDO.websiteUrl == attractionEntity.websiteUrl)
+            assert(eventDO.description == eventEntity.description)
+            assert(eventDO.eventId == eventEntity.eventId)
+            assert(eventDO.postTimeText == eventEntity.postTimeText)
+            assert(eventDO.title == eventEntity.title)
+            assert(eventDO.updateTimeText == eventEntity.updateTimeText)
+            assert(eventDO.websiteUrl == eventEntity.websiteUrl)
         }
     }
 }
