@@ -9,7 +9,7 @@
         android:id="@+id/fragment_attractionList"
         android:name="tw.com.deathhit.feature.attraction_list.AttractionListFragment"
         android:label="Attraction List" />
-13123
+
     <fragment
         android:id="@+id/fragment_attractionDetail"
         android:name="tw.com.deathhit.feature.attraction_detail.AttractionDetailFragment"
