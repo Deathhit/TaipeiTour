@@ -4,12 +4,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tw.com.deathhit.core.travel_taipei_api.enum_type.Language
 import tw.com.deathhit.core.travel_taipei_api.model.AttractionDto
+import tw.com.deathhit.core.travel_taipei_api.model.EventDto
 import tw.com.deathhit.core.travel_taipei_api.protocol.TravelTaipeiRetrofitService
 
 interface TravelTaipeiService {
     val pageSize: Int
 
     suspend fun getAttractions(language: Language, page: Int): List<AttractionDto>
+    suspend fun getEvents(language: Language, page: Int): List<EventDto>
 
     companion object {
         fun createTravelTaipeiService(baseUrl: String): TravelTaipeiService =
