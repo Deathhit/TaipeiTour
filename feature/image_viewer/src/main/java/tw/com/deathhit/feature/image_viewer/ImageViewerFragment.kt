@@ -218,9 +218,7 @@ class ImageViewerFragment : Fragment() {
         private const val SCALE_MAX = 4f
         private const val SCALE_MIN = 0.5f
 
-        fun create(imageUrl: String) = ImageViewerFragment().apply {
-            arguments = ImageViewerViewModel.createArgs(imageUrl)
-        }
+        fun createArgs(imageUrl: String) = ImageViewerViewModel.createArgs(imageUrl)
     }
 
     interface Callback {

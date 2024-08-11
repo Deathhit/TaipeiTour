@@ -74,6 +74,10 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.hilt)
 
+    //Navigation
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_attractionList">
+
+    <!--Fragment-->
+    <fragment
+        android:id="@+id/fragment_attractionList"
+        android:name="tw.com.deathhit.feature.attraction_list.AttractionListFragment"
+        android:label="Attraction List" />
+
+    <fragment
+        android:id="@+id/fragment_attractionDetail"
+        android:name="tw.com.deathhit.feature.attraction_detail.AttractionDetailFragment"
+        android:label="Attraction Detail" />
+
+    <fragment
+        android:id="@+id/fragment_attractionGallery"
+        android:name="tw.com.deathhit.feature.attraction_gallery.AttractionGalleryFragment"
+        android:label="Attraction Gallery" />
+
+    <fragment
+        android:id="@+id/fragment_imageViewer"
+        android:name="tw.com.deathhit.feature.image_viewer.ImageViewerFragment"
+        android:label="Image Viewer" />
+
+    <!--Action-->
+    <action
+        android:id="@+id/action_attractionDetail"
+        app:destination="@id/fragment_attractionDetail"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_attractionList"
+        app:destination="@id/fragment_attractionList"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_attractionGallery"
+        app:destination="@id/fragment_attractionGallery"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_imageViewer"
+        app:destination="@id/fragment_imageViewer" />
+</navigation>

@@ -114,9 +114,8 @@ class AttractionGalleryFragment : Fragment() {
         }
 
     companion object {
-        fun create(attractionId: String) = AttractionGalleryFragment().apply {
-            arguments = AttractionGalleryViewModel.createArgs(attractionId = attractionId)
-        }
+        fun createArgs(attractionId: String) =
+            AttractionGalleryViewModel.createArgs(attractionId = attractionId)
     }
 
     interface Callback {

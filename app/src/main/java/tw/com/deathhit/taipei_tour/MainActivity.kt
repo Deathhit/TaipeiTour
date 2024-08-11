@@ -3,11 +3,11 @@ package tw.com.deathhit.taipei_tour
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -26,16 +26,16 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
 
+    private val navController by lazy {
+        findNavController(R.id.container)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         configureFragmentCallbacks()
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
-        }
-
-        savedInstanceState ?: run {
-            viewModel.goToInitialScreen()
         }
 
         bindViewModelState()
@@ -50,10 +50,6 @@ class MainActivity : AppCompatActivity() {
                             when (action) {
                                 MainActivityViewModel.State.Action.GoBack -> onBackPressedDispatcher.onBackPressed()
 
-                                is MainActivityViewModel.State.Action.GoToInitialScreen -> goToInitialScreen(
-                                    screen = action.screen
-                                )
-
                                 is MainActivityViewModel.State.Action.GoToScreen -> goToScreen(
                                     screen = action.screen
                                 )
@@ -67,84 +63,72 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureFragmentCallbacks() {
-        supportFragmentManager.addFragmentOnAttachListener { _, fragment ->
-            when (fragment) {
-                is AttractionDetailFragment -> fragment.callback =
-                    object : AttractionDetailFragment.Callback {
-                        override fun onGoBack() {
-                            viewModel.goBack()
-                        }
+        supportFragmentManager.addFragmentOnAttachListener { _, hostFragment ->
+            when (hostFragment) {
+                is NavHostFragment -> hostFragment.childFragmentManager.addFragmentOnAttachListener { _, fragment ->
+                    when (fragment) {
+                        is AttractionDetailFragment -> fragment.callback =
+                            object : AttractionDetailFragment.Callback {
+                                override fun onGoBack() {
+                                    viewModel.goBack()
+                                }
 
-                        override fun onGoToGalleryScreen(attractionId: String) {
-                            viewModel.goToGalleryScreen(attractionId = attractionId)
-                        }
+                                override fun onGoToGalleryScreen(attractionId: String) {
+                                    viewModel.goToGalleryScreen(attractionId = attractionId)
+                                }
 
+                            }
+
+                        is AttractionGalleryFragment -> fragment.callback =
+                            object : AttractionGalleryFragment.Callback {
+                                override fun onGoBack() {
+                                    viewModel.goBack()
+                                }
+
+                                override fun onGoToImageViewerScreen(imageUrl: String) {
+                                    viewModel.goToImageViewer(imageUrl = imageUrl)
+                                }
+                            }
+
+                        is AttractionListFragment -> fragment.callback =
+                            object : AttractionListFragment.Callback {
+                                override fun onGoToAttractionDetailsScreen(attractionId: String) {
+                                    viewModel.goToAttractionDetailsScreen(attractionId = attractionId)
+                                }
+                            }
+
+                        is ImageViewerFragment -> fragment.callback =
+                            object : ImageViewerFragment.Callback {
+                                override fun onGoBack() {
+                                    viewModel.goBack()
+                                }
+                            }
                     }
-
-                is AttractionGalleryFragment -> fragment.callback =
-                    object : AttractionGalleryFragment.Callback {
-                        override fun onGoBack() {
-                            viewModel.goBack()
-                        }
-
-                        override fun onGoToImageViewerScreen(imageUrl: String) {
-                            viewModel.goToImageViewer(imageUrl = imageUrl)
-                        }
-                    }
-
-                is AttractionListFragment -> fragment.callback =
-                    object : AttractionListFragment.Callback {
-                        override fun onGoToAttractionDetailsScreen(attractionId: String) {
-                            viewModel.goToAttractionDetailsScreen(attractionId = attractionId)
-                        }
-                    }
-
-                is ImageViewerFragment -> fragment.callback =
-                    object : ImageViewerFragment.Callback {
-                        override fun onGoBack() {
-                            viewModel.goBack()
-                        }
-                    }
+                }
             }
         }
     }
 
-    private fun goToInitialScreen(screen: MainScreen) {
-        supportFragmentManager.commit {
-            val containerId = binding.container.id
-
-            setReorderingAllowed(true)
-
-            replace(containerId, screen.toFragment(), TAG_MAIN)
-        }
-    }
-
     private fun goToScreen(screen: MainScreen) {
-        supportFragmentManager.commit {
-            val containerId = binding.container.id
-
-            setReorderingAllowed(true)
-
-            setCustomAnimations(
-                tw.com.deathhit.core.app_ui.R.anim.slide_in_left,
-                tw.com.deathhit.core.app_ui.R.anim.slide_out_right
+        when (screen) {
+            is MainScreen.AttractionDetail -> navController.navigate(
+                R.id.action_attractionDetail,
+                AttractionDetailFragment.createArgs(attractionId = screen.attractionId)
             )
 
-            replace(containerId, screen.toFragment(), TAG_MAIN)
+            MainScreen.AttractionList -> navController.navigate(
+                R.id.action_attractionList
+            )
 
-            addToBackStack(null)
-        }
-    }
+            is MainScreen.Gallery -> navController.navigate(
+                R.id.action_attractionGallery,
+                AttractionGalleryFragment.createArgs(attractionId = screen.attractionId)
+            )
 
-    companion object {
-        private const val TAG = "MainActivity"
-        private const val TAG_MAIN = "$TAG.TAG_MAIN"
-
-        private fun MainScreen.toFragment(): Fragment = when (this) {
-            is MainScreen.AttractionDetail -> AttractionDetailFragment.create(attractionId = attractionId)
-            MainScreen.AttractionList -> AttractionListFragment.create()
-            is MainScreen.Gallery -> AttractionGalleryFragment.create(attractionId = attractionId)
-            is MainScreen.ImageViewer -> ImageViewerFragment.create(imageUrl = imageUrl)
+            is MainScreen.ImageViewer -> navController.navigate(
+                R.id.action_imageViewer,
+                ImageViewerFragment.createArgs(imageUrl = screen.imageUrl)
+            )
         }
     }
 }

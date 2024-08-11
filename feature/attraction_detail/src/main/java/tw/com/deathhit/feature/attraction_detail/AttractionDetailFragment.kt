@@ -110,7 +110,8 @@ class AttractionDetailFragment : Fragment() {
                             with(binding) {
                                 imageViewAttraction.let {
                                     Glide.with(it).load(attraction.imageUrl)
-                                        .placeholder(tw.com.deathhit.core.app_ui.R.mipmap.ic_launcher_round).into(it)
+                                        .placeholder(tw.com.deathhit.core.app_ui.R.mipmap.ic_launcher_round)
+                                        .into(it)
                                 }
                                 textViewAddress.text = attraction.address
                                 textViewIntroduction.text = Html.fromHtml(
@@ -128,9 +129,8 @@ class AttractionDetailFragment : Fragment() {
     }
 
     companion object {
-        fun create(attractionId: String) = AttractionDetailFragment().apply {
-            arguments = AttractionDetailViewModel.createArgs(attractionId = attractionId)
-        }
+        fun createArgs(attractionId: String) =
+            AttractionDetailViewModel.createArgs(attractionId = attractionId)
     }
 
     interface Callback {
