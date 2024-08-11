@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/attraction" />
             <option value="$PROJECT_DIR$/data/attraction_image" />
+            <option value="$PROJECT_DIR$/data/event" />
             <option value="$PROJECT_DIR$/data/language" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature" />
