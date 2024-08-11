@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/feature/attraction_list" />
             <option value="$PROJECT_DIR$/feature/event_list" />
             <option value="$PROJECT_DIR$/feature/image_viewer" />
+            <option value="$PROJECT_DIR$/feature/navigation" />
             <option value="$PROJECT_DIR$/feature/set_language" />
           </set>
         </option>
