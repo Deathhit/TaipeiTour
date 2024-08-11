@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-kapt")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -42,14 +42,12 @@ dependencies {
     implementation(project(":domain"))
 
     //Coroutine-Test
-    val coroutineVersion = "1.7.3"
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
+    androidTestImplementation(libs.jetbrains.koltin.coroutine.test)
 
     //Paging-Test
-    val pagingVersion = "3.2.1"
-    androidTestImplementation("androidx.paging:paging-testing:$pagingVersion")
+    androidTestImplementation(libs.paging.test)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

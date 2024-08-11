@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {
@@ -36,14 +36,13 @@ android {
 
 dependencies {
     //Coroutine
-    val coroutineVersion = "1.7.3"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+    implementation(libs.jetbrains.koltin.coroutine)
 
     //Retrofit
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

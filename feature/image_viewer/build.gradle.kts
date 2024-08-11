@@ -1,10 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("dagger.hilt.android.plugin")
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.google.dagger.hilt)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.jetbrains.kotlin.parcelize)
 }
+
 android {
     namespace = "tw.com.deathhit.feature.image_viewer"
     compileSdk = 34
@@ -44,20 +45,17 @@ dependencies {
     implementation(project(":core:app_ui"))
 
     //Coroutine-Test
-    val coroutineVersion = "1.7.3"
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
+    androidTestImplementation(libs.jetbrains.koltin.coroutine.test)
 
     //Glide
-    val glideVersion = "4.16.0"
-    kapt("com.github.bumptech.glide:compiler:$glideVersion")
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt(libs.glide.compiler)
+    implementation(libs.glide)
 
     //Hilt
-    val hiltVersion = "2.50"
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

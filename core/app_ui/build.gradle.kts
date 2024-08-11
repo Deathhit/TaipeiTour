@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {
@@ -36,32 +36,30 @@ android {
 
 dependencies {
     //Appcompat
-    api("androidx.appcompat:appcompat:1.6.1")
+    api(libs.androidx.appcompat)
 
     //Constraint Layout
-    api("androidx.constraintlayout:constraintlayout:2.1.4")
+    api(libs.constraintlayout)
 
     //Core KTX
-    api("androidx.core:core-ktx:1.12.0")
+    api(libs.androidx.core.ktx)
 
     //Coroutine
-    val coroutineVersion = "1.7.3"
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+    implementation(libs.jetbrains.koltin.coroutine)
 
     //Fragment KTX
-    api("androidx.fragment:fragment-ktx:1.6.2")
+    api(libs.androidx.fragment.ktx)
 
     //Material Design
-    api("com.google.android.material:material:1.11.0")
+    api(libs.material)
 
     //Paging
-    val pagingVersion = "3.2.1"
-    api("androidx.paging:paging-runtime-ktx:$pagingVersion")
+    api(libs.paging.runtime)
 
     //Recycler View
-    api("androidx.recyclerview:recyclerview:1.3.2")
+    api(libs.recyclerview)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.jetbrains.kotlin.jvm)
 }
 
 java {
@@ -10,10 +10,8 @@ java {
 
 dependencies {
     //Coroutine
-    val coroutineVersion = "1.7.3"
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+    implementation(libs.jetbrains.koltin.coroutine)
 
     //Paging
-    val pagingVersion = "3.2.1"
-    api("androidx.paging:paging-common-ktx:$pagingVersion")
+    api(libs.paging.common)
 }

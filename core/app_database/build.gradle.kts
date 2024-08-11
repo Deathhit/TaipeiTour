@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-kapt")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -43,27 +43,24 @@ android {
 
 dependencies {
     //Coroutine
-    val coroutineVersion = "1.7.3"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+    implementation(libs.jetbrains.koltin.coroutine)
 
     //Coroutine-Test
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
+    androidTestImplementation(libs.jetbrains.koltin.coroutine.test)
 
     //Paging
-    val pagingVersion = "3.2.1"
-    api("androidx.paging:paging-runtime-ktx:$pagingVersion")
+    api(libs.paging.runtime)
 
     //Paging-Test
-    androidTestImplementation("androidx.paging:paging-testing:$pagingVersion")
+    androidTestImplementation(libs.paging.test)
 
     //Room
-    val roomVersion = "2.6.1"
-    kapt("androidx.room:room-compiler:$roomVersion")
-    api("androidx.room:room-ktx:$roomVersion")
-    api("androidx.room:room-paging:$roomVersion")
-    api("androidx.room:room-runtime:$roomVersion")
+    kapt(libs.room.compiler)
+    api(libs.room.ktx)
+    api(libs.room.paging)
+    api(libs.room.runtime)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
