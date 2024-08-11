@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import tw.com.deathhit.core.app_database.Column
-import tw.com.deathhit.core.app_database.entity.AttractionRemoteKeysEntity
 import tw.com.deathhit.core.app_database.entity.EventRemoteKeysEntity
 
 @Dao

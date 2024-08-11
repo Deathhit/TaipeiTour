@@ -5,6 +5,7 @@ import androidx.room.Room
 import tw.com.deathhit.core.app_database.AppDatabase
 import tw.com.deathhit.core.app_database.entity.AttractionEntity
 import tw.com.deathhit.core.app_database.entity.AttractionImageEntity
+import tw.com.deathhit.core.app_database.entity.EventEntity
 import tw.com.deathhit.core.app_database.enum_type.Language
 import java.util.UUID
 import kotlin.random.Random
@@ -45,6 +46,28 @@ fun generateAttractionImageEntities(attractionId: String) =
             )
         }
     }.toList()
+
+fun generateEventEntities(language: Language = generateLanguage()) =
+mutableListOf<EventEntity>().apply {
+    for (i in 0..getRandomInt()) {
+        add(generateEventEntity(language = language))
+    }
+}.toList()
+
+fun generateEventEntity(
+    eventId: String = generateEventId(),
+    language: Language = generateLanguage()
+) = EventEntity(
+    description = getRandomStr(),
+    eventId = eventId,
+    language = language,
+    postTimeText = getRandomStr(),
+    title = getRandomStr(),
+    updateTimeText = getRandomStr(),
+    websiteUrl = getRandomStr()
+)
+
+fun generateEventId() = getRandomStr()
 
 fun generateLanguage() = Language.entries.toTypedArray().random()
 

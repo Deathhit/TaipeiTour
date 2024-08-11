@@ -12,6 +12,7 @@ import tw.com.deathhit.core.app_database.dao.AttractionItemDao
 import tw.com.deathhit.core.app_database.dao.AttractionRemoteKeysDao
 import tw.com.deathhit.core.app_database.dao.AttractionRemoteOrderDao
 import tw.com.deathhit.core.app_database.dao.EventDao
+import tw.com.deathhit.core.app_database.dao.EventItemDao
 import tw.com.deathhit.core.app_database.dao.EventRemoteKeysDao
 import tw.com.deathhit.core.app_database.dao.EventRemoteOrderDao
 import tw.com.deathhit.core.app_database.entity.AttractionEntity
@@ -55,6 +56,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun attractionRemoteKeysDao(): AttractionRemoteKeysDao
     abstract fun attractionRemoteOrderDao(): AttractionRemoteOrderDao
     abstract fun eventDao(): EventDao
+    abstract fun eventItemDao(): EventItemDao
     abstract fun eventRemoteKeysDao(): EventRemoteKeysDao
     abstract fun eventRemoteOrderDao(): EventRemoteOrderDao
 }
