@@ -8,6 +8,7 @@
     android:checkable="true"
     app:cardBackgroundColor="@android:color/transparent"
     app:contentPadding="16dp"
+    app:contentPaddingRight="32dp"
     app:strokeWidth="0dp">
 
     <TextView

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +46,6 @@ class SetLanguageFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding.recyclerView) {
             adapter = createLanguageListAdapter().also { _languageListAdapter = it }
-            setHasFixedSize(true)
         }
 
         bindViewModelState()
