@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -30,6 +32,9 @@ class AttractionListFragment : Fragment() {
     private val attractionListAdapter get() = _attractionListAdapter!!
     private var _attractionListAdapter: AttractionListAdapter? = null
 
+    private val onSwipeRefreshListener =
+        SwipeRefreshLayout.OnRefreshListener { attractionListAdapter.refresh() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,7 +51,23 @@ class AttractionListFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+        bindLoadState()
+
         bindViewModelState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        with(binding) {
+            swipeRefreshLayout.setOnRefreshListener(onSwipeRefreshListener)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        with(binding) {
+            swipeRefreshLayout.setOnRefreshListener(null)
+        }
     }
 
     override fun onDestroyView() {
@@ -55,6 +76,14 @@ class AttractionListFragment : Fragment() {
 
         _binding = null
         _attractionListAdapter = null
+    }
+
+    private fun bindLoadState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            attractionListAdapter.loadStateFlow.distinctUntilChanged().collectLatest {
+                binding.swipeRefreshLayout.isRefreshing = it.refresh is LoadState.Loading
+            }
+        }
     }
 
     private fun bindViewModelState() {

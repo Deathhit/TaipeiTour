@@ -63,6 +63,9 @@ dependencies {
     //Recycler View
     api(libs.recyclerview)
 
+    //Swipe Refresh Layout
+    api(libs.androidx.swiperefreshlayout)
+
     //View Pager 2
     api(libs.viewpager2)
 
