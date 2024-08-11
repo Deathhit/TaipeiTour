@@ -26,6 +26,9 @@ internal fun Language.toValue(): String = when(this) {
     Language.ENGLISH -> "en"
     Language.JAPANESE -> "ja"
     Language.KOREAN -> "ko"
+    Language.SPANISH -> "es"
+    Language.THAI -> "th"
+    Language.VIETNAMESE -> "vi"
     Language.ZH_CN -> "zh-cn"
     Language.ZH_TW -> "zh-tw"
 }

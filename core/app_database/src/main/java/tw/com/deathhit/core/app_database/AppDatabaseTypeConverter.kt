@@ -12,6 +12,9 @@ internal object AppDatabaseTypeConverter {
         Language.ENGLISH.id -> Language.ENGLISH
         Language.JAPANESE.id -> Language.JAPANESE
         Language.KOREAN.id -> Language.KOREAN
+        Language.SPANISH.id -> Language.SPANISH
+        Language.THAI.id -> Language.THAI
+        Language.VIETNAMESE.id -> Language.VIETNAMESE
         Language.ZH_CN.id -> Language.ZH_CN
         Language.ZH_TW.id -> Language.ZH_TW
         else -> null

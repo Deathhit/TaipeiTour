@@ -24,6 +24,9 @@ internal fun Language.toDatabaseType() = when(this) {
     Language.ENGLISH -> tw.com.deathhit.core.app_database.enum_type.Language.ENGLISH
     Language.JAPANESE -> tw.com.deathhit.core.app_database.enum_type.Language.JAPANESE
     Language.KOREAN -> tw.com.deathhit.core.app_database.enum_type.Language.KOREAN
+    Language.SPANISH -> tw.com.deathhit.core.app_database.enum_type.Language.SPANISH
+    Language.THAI -> tw.com.deathhit.core.app_database.enum_type.Language.THAI
+    Language.VIETNAMESE -> tw.com.deathhit.core.app_database.enum_type.Language.VIETNAMESE
     Language.ZH_CN -> tw.com.deathhit.core.app_database.enum_type.Language.ZH_CN
     Language.ZH_TW -> tw.com.deathhit.core.app_database.enum_type.Language.ZH_TW
 }
@@ -32,6 +35,9 @@ internal fun Language.toApiType() = when (this) {
     Language.ENGLISH -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.ENGLISH
     Language.JAPANESE -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.JAPANESE
     Language.KOREAN -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.KOREAN
+    Language.SPANISH -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.SPANISH
+    Language.THAI -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.THAI
+    Language.VIETNAMESE -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.VIETNAMESE
     Language.ZH_CN -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.ZH_CN
     Language.ZH_TW -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.ZH_TW
 }

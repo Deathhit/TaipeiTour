@@ -29,7 +29,10 @@ class LanguageRepositoryImp(val context: Context) : LanguageRepository {
             Language.ZH_CN,
             Language.ENGLISH,
             Language.JAPANESE,
-            Language.KOREAN
+            Language.KOREAN,
+            Language.SPANISH,
+            Language.THAI,
+            Language.VIETNAMESE
         )
     }
 }
