@@ -22,7 +22,7 @@
             android:id="@+id/toolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|snap"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:titleEnabled="false"
             app:toolbarId="@id/toolbar">
 
