@@ -43,7 +43,6 @@ android {
 
 dependencies {
     implementation(project(":core:app_ui"))
-    implementation(project(":domain"))
 
     //Coroutine-Test
     androidTestImplementation(libs.jetbrains.koltin.coroutine.test)
