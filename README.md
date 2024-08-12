@@ -24,6 +24,7 @@ To see the related medium article, checkout the [`Android Application Architectu
 
 * Dark Mode
 * CollapsingToolbarLayout
+* Coroutine
 * Kotlin
 * Image Viewer with zoom in and zoom out capabilities
 * Material 3
