@@ -23,6 +23,7 @@ To see the related medium article, checkout the [`Android Application Architectu
 ## Features
 
 * Dark Mode
+* Database Schema with CQRS Pattern
 * CollapsingToolbarLayout
 * Coroutine
 * Kotlin
