@@ -15,13 +15,27 @@ To see the related medium article, checkout the [`Android Application Architectu
 <img src="docs/screenshots/Screenshot_6.png" width = 360> &nbsp;
 </p>
 
-## Features
+## Architecture Overview
 
 <img src="docs/diagrams/Android App Architecture Overview.png"/>
 <img src="docs/diagrams/Taipei Tour Dependency Graph.png"/>
 
-This example shows how to build an Android project based on the app architecture.
+## Features
 
-## Api References
+* Dark Mode
+* CollapsingToolbarLayout
+* Kotlin
+* Image Viewer with zoom in and zoom out capabilities
+* Material 3
+* MVVM
+* Language Settings
+* Supports offline functionality
+* Paging 3
+* Single State View Model
+* Unidirectional Flow
+* Unit tests implemented in the Data Layer and Core Layer
+* ViewPager2
+
+## Api Reference
 
 https://www.travel.taipei/open-api/swagger/ui/index#/Attractions/Attractions_All
