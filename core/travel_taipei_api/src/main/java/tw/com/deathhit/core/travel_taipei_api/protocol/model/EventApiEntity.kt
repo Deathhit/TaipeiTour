@@ -1,6 +1,6 @@
-package tw.com.deathhit.core.travel_taipei_api.model
+package tw.com.deathhit.core.travel_taipei_api.protocol.model
 
-data class EventDto(
+data class EventApiEntity(
     val description: String,
     val id: String,
     val modified: String,

@@ -3,7 +3,7 @@ package tw.com.deathhit.data.event
 import tw.com.deathhit.core.app_database.entity.EventEntity
 import tw.com.deathhit.core.app_database.entity.EventRemoteOrderEntity
 import tw.com.deathhit.core.app_database.view.EventItemView
-import tw.com.deathhit.core.travel_taipei_api.model.EventDto
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.EventApiEntity
 import tw.com.deathhit.data.event.model.EventRemoteItem
 import tw.com.deathhit.domain.enum_type.Language
 import tw.com.deathhit.domain.model.EventDO
@@ -17,20 +17,20 @@ internal fun EventItemView.toDO() = EventDO(
     websiteUrl = websiteUrl
 )
 
-internal fun List<EventDto>.toEventRemoteItems(language: Language, page: Int, pageSize: Int) =
-    mapIndexed { index, dto ->
+internal fun List<EventApiEntity>.toEventRemoteItems(language: Language, page: Int, pageSize: Int) =
+    mapIndexed { index, entity ->
         EventRemoteItem(
             event = EventEntity(
-                description = dto.description,
-                eventId = dto.id,
+                description = entity.description,
+                eventId = entity.id,
                 language = language.toDatabaseType(),
-                postTimeText = dto.posted,
-                title = dto.title,
-                updateTimeText = dto.modified,
-                websiteUrl = dto.url
+                postTimeText = entity.posted,
+                title = entity.title,
+                updateTimeText = entity.modified,
+                websiteUrl = entity.url
             ),
             eventRemoteOrder = EventRemoteOrderEntity(
-                eventId = dto.id,
+                eventId = entity.id,
                 remoteOrder = index + (page - 1) * pageSize /*offset*/
             )
         )

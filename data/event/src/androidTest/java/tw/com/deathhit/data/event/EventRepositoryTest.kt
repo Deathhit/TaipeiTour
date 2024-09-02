@@ -15,8 +15,8 @@ import org.junit.Test
 import tw.com.deathhit.core.app_database.AppDatabase
 import tw.com.deathhit.core.app_database.entity.EventRemoteOrderEntity
 import tw.com.deathhit.core.travel_taipei_api.TravelTaipeiService
-import tw.com.deathhit.core.travel_taipei_api.model.AttractionDto
-import tw.com.deathhit.core.travel_taipei_api.model.EventDto
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.AttractionApiEntity
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.EventApiEntity
 import tw.com.deathhit.data.event.config.buildAppDatabase
 import tw.com.deathhit.data.event.config.generateEventEntities
 import tw.com.deathhit.data.event.config.generateLanguage
@@ -63,12 +63,12 @@ class EventRepositoryTest {
                 override suspend fun getAttractions(
                     language: tw.com.deathhit.core.travel_taipei_api.enum_type.Language,
                     page: Int
-                ): List<AttractionDto> = emptyList()
+                ): List<AttractionApiEntity> = emptyList()
 
                 override suspend fun getEvents(
                     language: tw.com.deathhit.core.travel_taipei_api.enum_type.Language,
                     page: Int
-                ): List<EventDto> = emptyList()
+                ): List<EventApiEntity> = emptyList()
             }
         )
 
@@ -113,12 +113,12 @@ class EventRepositoryTest {
                 override suspend fun getAttractions(
                     language: tw.com.deathhit.core.travel_taipei_api.enum_type.Language,
                     page: Int
-                ): List<AttractionDto> = emptyList()
+                ): List<AttractionApiEntity> = emptyList()
 
                 override suspend fun getEvents(
                     language: tw.com.deathhit.core.travel_taipei_api.enum_type.Language,
                     page: Int
-                ): List<EventDto> = emptyList()
+                ): List<EventApiEntity> = emptyList()
             }
         )
 

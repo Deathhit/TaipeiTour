@@ -15,10 +15,10 @@ import tw.com.deathhit.core.app_database.AppDatabase
 import tw.com.deathhit.core.app_database.view.EventItemView
 import tw.com.deathhit.core.travel_taipei_api.TravelTaipeiService
 import tw.com.deathhit.core.travel_taipei_api.enum_type.Language
-import tw.com.deathhit.core.travel_taipei_api.model.AttractionDto
-import tw.com.deathhit.core.travel_taipei_api.model.EventDto
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.AttractionApiEntity
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.EventApiEntity
 import tw.com.deathhit.data.event.config.buildAppDatabase
-import tw.com.deathhit.data.event.config.generateEventDtoList
+import tw.com.deathhit.data.event.config.generateEventApiEntities
 import tw.com.deathhit.data.event.config.generateLanguage
 
 @OptIn(ExperimentalPagingApi::class)
@@ -50,12 +50,12 @@ class EventRemoteMediatorTest {
             override suspend fun getAttractions(
                 language: Language,
                 page: Int
-            ): List<AttractionDto> = emptyList()
+            ): List<AttractionApiEntity> = emptyList()
 
             override suspend fun getEvents(
                 language: Language,
                 page: Int
-            ): List<EventDto> {
+            ): List<EventApiEntity> {
                 throw RuntimeException("Test")
             }
         }
@@ -92,12 +92,12 @@ class EventRemoteMediatorTest {
             override suspend fun getAttractions(
                 language: Language,
                 page: Int
-            ): List<AttractionDto> = emptyList()
+            ): List<AttractionApiEntity> = emptyList()
 
             override suspend fun getEvents(
                 language: Language,
                 page: Int
-            ): List<EventDto> = generateEventDtoList(from = pageSize + 1, until = pageSize + 2)
+            ): List<EventApiEntity> = generateEventApiEntities(from = pageSize + 1, until = pageSize + 2)
         }
 
         val remoteMediator = EventRemoteMediator(
@@ -132,12 +132,12 @@ class EventRemoteMediatorTest {
             override suspend fun getAttractions(
                 language: Language,
                 page: Int
-            ): List<AttractionDto> = emptyList()
+            ): List<AttractionApiEntity> = emptyList()
 
             override suspend fun getEvents(
                 language: Language,
                 page: Int
-            ): List<EventDto> = emptyList()
+            ): List<EventApiEntity> = emptyList()
         }
 
         val remoteMediator = EventRemoteMediator(

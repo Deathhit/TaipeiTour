@@ -5,7 +5,7 @@ import tw.com.deathhit.core.app_database.entity.AttractionImageEntity
 import tw.com.deathhit.core.app_database.entity.AttractionImageRemoteOrderEntity
 import tw.com.deathhit.core.app_database.entity.AttractionRemoteOrderEntity
 import tw.com.deathhit.core.app_database.view.AttractionItemView
-import tw.com.deathhit.core.travel_taipei_api.model.AttractionDto
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.AttractionApiEntity
 import tw.com.deathhit.data.attraction.model.AttractionRemoteItem
 import tw.com.deathhit.domain.enum_type.Language
 import tw.com.deathhit.domain.model.AttractionDO
@@ -42,33 +42,33 @@ internal fun Language.toApiType() = when (this) {
     Language.ZH_TW -> tw.com.deathhit.core.travel_taipei_api.enum_type.Language.ZH_TW
 }
 
-internal fun List<AttractionDto>.toAttractionRemoteItems(language: Language, page: Int, pageSize: Int) =
-    mapIndexed { attractionIndex, attractionDto ->
+internal fun List<AttractionApiEntity>.toAttractionRemoteItems(language: Language, page: Int, pageSize: Int) =
+    mapIndexed { attractionIndex, attractionApiEntity ->
         AttractionRemoteItem(
             attraction = AttractionEntity(
-                address = attractionDto.address,
-                attractionId = attractionDto.attractionId,
-                introduction = attractionDto.introduction,
+                address = attractionApiEntity.address,
+                attractionId = attractionApiEntity.id,
+                introduction = attractionApiEntity.introduction,
                 language = language.toDatabaseType(),
-                name = attractionDto.name,
-                updateTimeText = attractionDto.updateTimeText,
-                websiteUrl = attractionDto.url
+                name = attractionApiEntity.name,
+                updateTimeText = attractionApiEntity.modified,
+                websiteUrl = attractionApiEntity.url
             ),
-            attractionImages = attractionDto.images.map { attractionImageDto ->
+            attractionImages = attractionApiEntity.images.map { attractionImageDto ->
                 AttractionImageEntity(
-                    attractionId = attractionDto.attractionId,
+                    attractionId = attractionApiEntity.id,
                     imageUrl = attractionImageDto.src
                 )
             },
-            attractionImageRemoteOrders = attractionDto.images.mapIndexed { attractionImageIndex, attractionImageDto ->
+            attractionImageRemoteOrders = attractionApiEntity.images.mapIndexed { attractionImageIndex, attractionImageDto ->
                 AttractionImageRemoteOrderEntity(
-                    attractionId = attractionDto.attractionId,
+                    attractionId = attractionApiEntity.id,
                     imageUrl = attractionImageDto.src,
                     remoteOrder = attractionImageIndex
                 )
             },
             attractionRemoteOrder = AttractionRemoteOrderEntity(
-                attractionId = attractionDto.attractionId,
+                attractionId = attractionApiEntity.id,
                 remoteOrder = attractionIndex + (page - 1) * pageSize /*offset*/
             )
         )

@@ -2,17 +2,17 @@ package tw.com.deathhit.data.event
 
 import org.junit.Test
 import tw.com.deathhit.core.app_database.view.EventItemView
-import tw.com.deathhit.core.travel_taipei_api.model.EventDto
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.EventApiEntity
 import tw.com.deathhit.domain.enum_type.Language
 import java.util.UUID
 import kotlin.random.Random
 
 class MapperExtTest {
     @Test
-    fun mapEventDtoListToEventRemoteItemsList() {
+    fun mapEventApiEntityListToEventRemoteItemsList() {
         //Given
-        val eventDtoList = listOf(
-            EventDto(
+        val eventApiEntities = listOf(
+            EventApiEntity(
                 description = getRandomStr(),
                 id = getRandomStr(),
                 modified = getRandomStr(),
@@ -20,7 +20,7 @@ class MapperExtTest {
                 title = getRandomStr(),
                 url = getRandomStr()
             ),
-            EventDto(
+            EventApiEntity(
                 description = getRandomStr(),
                 id = getRandomStr(),
                 modified = getRandomStr(),
@@ -28,7 +28,7 @@ class MapperExtTest {
                 title = getRandomStr(),
                 url = getRandomStr()
             ),
-            EventDto(
+            EventApiEntity(
                 description = getRandomStr(),
                 id = getRandomStr(),
                 modified = getRandomStr(),
@@ -43,7 +43,7 @@ class MapperExtTest {
         val pageSize = getRandomInt()
 
         //When
-        val eventRemoteItemList = eventDtoList.toEventRemoteItems(
+        val eventRemoteItemList = eventApiEntities.toEventRemoteItems(
             language = language,
             page = page,
             pageSize = pageSize
@@ -53,20 +53,20 @@ class MapperExtTest {
         val offset = (page - 1) * pageSize
 
         eventRemoteItemList.forEachIndexed { eventIndex, eventRemoteItem ->
-            val eventDto = eventDtoList[eventIndex]
+            val eventApiEntity = eventApiEntities[eventIndex]
 
             with(eventRemoteItem.event) {
-                assert(description == eventDto.description)
-                assert(eventId == eventDto.id)
-                assert(postTimeText == eventDto.posted)
+                assert(description == eventApiEntity.description)
+                assert(eventId == eventApiEntity.id)
+                assert(postTimeText == eventApiEntity.posted)
                 assert(this.language == language.toDatabaseType())
-                assert(title == eventDto.title)
-                assert(updateTimeText == eventDto.modified)
-                assert(websiteUrl == eventDto.url)
+                assert(title == eventApiEntity.title)
+                assert(updateTimeText == eventApiEntity.modified)
+                assert(websiteUrl == eventApiEntity.url)
             }
 
             with(eventRemoteItem.eventRemoteOrder) {
-                assert(eventId == eventDto.id)
+                assert(eventId == eventApiEntity.id)
                 assert(remoteOrder == eventIndex + offset)
             }
         }

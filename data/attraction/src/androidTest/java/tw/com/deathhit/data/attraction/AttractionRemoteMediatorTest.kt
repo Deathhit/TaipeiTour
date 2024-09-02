@@ -15,9 +15,10 @@ import tw.com.deathhit.core.app_database.AppDatabase
 import tw.com.deathhit.core.app_database.view.AttractionItemView
 import tw.com.deathhit.core.travel_taipei_api.TravelTaipeiService
 import tw.com.deathhit.core.travel_taipei_api.enum_type.Language
-import tw.com.deathhit.core.travel_taipei_api.model.AttractionDto
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.AttractionApiEntity
+import tw.com.deathhit.core.travel_taipei_api.protocol.model.EventApiEntity
 import tw.com.deathhit.data.attraction.config.buildAppDatabase
-import tw.com.deathhit.data.attraction.config.generateAttractionDtoList
+import tw.com.deathhit.data.attraction.config.generateAttractionApiEntities
 import tw.com.deathhit.data.attraction.config.generateLanguage
 
 @OptIn(ExperimentalPagingApi::class)
@@ -49,7 +50,11 @@ class AttractionRemoteMediatorTest {
             override suspend fun getAttractions(
                 language: Language,
                 page: Int
-            ): List<AttractionDto> {
+            ): List<AttractionApiEntity> {
+                throw RuntimeException("Test")
+            }
+
+            override suspend fun getEvents(language: Language, page: Int): List<EventApiEntity> {
                 throw RuntimeException("Test")
             }
         }
@@ -86,7 +91,11 @@ class AttractionRemoteMediatorTest {
             override suspend fun getAttractions(
                 language: Language,
                 page: Int
-            ): List<AttractionDto> = generateAttractionDtoList(from = pageSize + 1, until = pageSize + 2)
+            ): List<AttractionApiEntity> = generateAttractionApiEntities(from = pageSize + 1, until = pageSize + 2)
+
+            override suspend fun getEvents(language: Language, page: Int): List<EventApiEntity> {
+                throw RuntimeException("Test")
+            }
         }
 
         val remoteMediator = AttractionRemoteMediator(
@@ -121,7 +130,11 @@ class AttractionRemoteMediatorTest {
             override suspend fun getAttractions(
                 language: Language,
                 page: Int
-            ): List<AttractionDto> = emptyList()
+            ): List<AttractionApiEntity> = emptyList()
+
+            override suspend fun getEvents(language: Language, page: Int): List<EventApiEntity> {
+                throw RuntimeException("Test")
+            }
         }
 
         val remoteMediator = AttractionRemoteMediator(
