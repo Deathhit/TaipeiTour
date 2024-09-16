@@ -11,7 +11,7 @@ class TravelTaipeiServiceImp(serverUrl: String) : TravelTaipeiService {
     private val retrofitService: TravelTaipeiRetrofitService =
         createTravelTaipeiRetrofitService(serverUrl = serverUrl)
 
-    override val pageSize: Int = 30
+    override val pageSize: Int = 128
 
     override suspend fun getAttractions(language: Language, page: Int): List<AttractionApiEntity> =
         retrofitService.getAttractions(lang = language.toValue(), page = page).data
