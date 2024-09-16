@@ -2,7 +2,7 @@
 
 A sample project to demonstrate the practices of the Android app architecture illustrated below.
 
-To see the related medium article, checkout the [`Android Application Architecture Showcase : Sunflower Clone`](https://medium.com/@b9915034/android-application-architecture-showcase-sunflower-clone-dee729f6e1f2).
+To see the related medium article, checkout the [`Android Architecture Showcase: Layered Feature Modular Architecture in Sunflower Clone`](https://medium.com/@b9915034/android-application-architecture-showcase-sunflower-clone-dee729f6e1f2).
 
 ## Screenshots
 
