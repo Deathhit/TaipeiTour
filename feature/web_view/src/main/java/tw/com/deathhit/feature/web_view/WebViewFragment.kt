@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -36,6 +39,7 @@ class WebViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configureEdgeToEdge()
         configureWebView()
 
         bindViewModelState()
@@ -95,6 +99,22 @@ class WebViewFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun configureEdgeToEdge() {
+        ViewCompat.setOnApplyWindowInsetsListener(requireView()) { root, windowInsets ->
+            val insets = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            root.updatePadding(
+                left = insets.left,
+                right = insets.right,
+                top = insets.top
+            )
+
+            WindowInsetsCompat.CONSUMED
         }
     }
 

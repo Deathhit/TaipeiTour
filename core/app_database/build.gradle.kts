@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.google.ksp)
 }
 
 android {
     namespace = "tw.com.deathhit.core.app_database"
-    compileSdk = 34
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 24
@@ -26,18 +26,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kapt {
-        arguments {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
 }
 
@@ -55,7 +49,7 @@ dependencies {
     androidTestImplementation(libs.paging.test)
 
     //Room
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
     api(libs.room.ktx)
     api(libs.room.paging)
     api(libs.room.runtime)

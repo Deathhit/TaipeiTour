@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -58,6 +61,8 @@ class AttractionDetailFragment : Fragment() {
         with(binding.textViewWebsiteUrl) {
             movementMethod = LinkMovementMethod.getInstance()
         }
+
+        configureEdgeToEdge()
 
         bindViewModelState()
     }
@@ -125,6 +130,22 @@ class AttractionDetailFragment : Fragment() {
                         }
                 }
             }
+        }
+    }
+
+    private fun configureEdgeToEdge() {
+        ViewCompat.setOnApplyWindowInsetsListener(requireView()) { root, windowInsets ->
+            val insets = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            root.updatePadding(
+                left = insets.left,
+                right = insets.right,
+                top = insets.top
+            )
+
+            WindowInsetsCompat.CONSUMED
         }
     }
 
